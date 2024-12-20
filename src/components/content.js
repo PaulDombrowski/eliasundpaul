@@ -153,7 +153,6 @@ Rachika Nayar - Our Wretched Fantasy<br/>
   
 <img className="image" src={process.env.PUBLIC_URL + "/4.png"} alt="Bildbeschreibung" />
 
-<img className="image" src={process.env.PUBLIC_URL + "/5.png"} alt="Bildbeschreibung" />
 
 
    
