@@ -197,10 +197,10 @@ a:hover {
 
 @keyframes angelGlow {
   0%, 100% {
-    filter: drop-shadow(0 0 10px rgb(255, 222, 165)) drop-shadow(0 0 20px pink);
+    filter: drop-shadow(0 0 30px rgb(255, 222, 165)) drop-shadow(0 0 30px pink);
   }
   50% {
-    filter: drop-shadow(0 0 30px pink) drop-shadow(0 0 40px rgb(255, 236, 130));
+    filter: drop-shadow(0 0 50px pink) drop-shadow(0 0 50px rgb(255, 236, 130));
   }
 }
 

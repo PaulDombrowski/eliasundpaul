@@ -14,7 +14,7 @@ function Content() {
       <a href="https://open.spotify.com/playlist/1Y8WvSQlEhZDeFoPmQM6Os?si=ad8324c1898b48d8" target="_blank" rel="noopener noreferrer"> <h1 className="title">2024 <br /> U MIGHT BE THE REASON FOR THE CHRISTMAS SEASON</h1>
 
   
-<img className="image" src={process.env.PUBLIC_URL + "/Sb_P957uMJH8Mkxwgv8t1-transformed.png"} alt="Bildbeschreibung" />
+
 
  <p className="text"  >
  
@@ -75,7 +75,7 @@ Soap&Skin - The end <br />
      <a href="https://open.spotify.com/playlist/5rDEvWjqxY1HIkLZ6ebw4i?si=a02c2377804c4566" target="_blank" rel="noopener noreferrer"> <h1 className="title">2023 <br /> House of Cherubim</h1>
 
   
-     <img className="image" src={process.env.PUBLIC_URL + "/Sb_P957uMJH8Mkxwgv8t1-transformed.png"} alt="Bildbeschreibung" />
+    
 
       <p className="text"  >
       
@@ -123,8 +123,7 @@ Dialect - Teams <br />
 
       <a href="https://open.spotify.com/playlist/4A7XXZMGnOdX1mOrsofQyw?si=2d74216f8a4748da" target="_blank" rel="noopener noreferrer"> <h1 className="title">2022 <br /> All Caroling (oh,ah,oh)</h1>
 
-      <img className="image" src={process.env.PUBLIC_URL + "/Sb_P957uMJH8Mkxwgv8t1-transformed.png"} alt="Bildbeschreibung" />
-      
+    
 
       <p className="text">
 
@@ -163,7 +162,7 @@ Rachika Nayar - Our Wretched Fantasy<br/>
 
       <a href="https://open.spotify.com/playlist/3DQpDTb8kCe4gxNfOAg776?si=c3c2300d10ab4cde" target="_blank" rel="noopener noreferrer"> <h1 className="title">2021 <br />If I was a DJ sent from heaven to heal you</h1>
 
-      <img className="image" src={process.env.PUBLIC_URL + "/Sb_P957uMJH8Mkxwgv8t1-transformed.png"} alt="Bildbeschreibung" />
+    
       
 
       <p className="text">
@@ -199,9 +198,9 @@ Steve Hauschildt - Time We Have<br/>
 
 
 
-<img className="image" src={process.env.PUBLIC_URL + "/7.png"} alt="Bildbeschreibung" />
+<img className="image" src={process.env.PUBLIC_URL + "/6.png"} alt="Bildbeschreibung" />
 
-<img className="image" src={process.env.PUBLIC_URL + "/8.png"} alt="Bildbeschreibung" />
+
 
 
     </div>
