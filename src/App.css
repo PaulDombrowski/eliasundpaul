@@ -1,35 +1,47 @@
 /* Schriftarten */
 @font-face {
   font-family: 'Amelina Script';
-  src: url('/public/Amelina Script.ttf') format('woff2');
+  src: url('Amelina Script.ttf') format('woff2');
 }
 
 @font-face {
   font-family: 'Hypik';
-  src: url('/public/hypik.ttf') format('woff2');
+  src: url('hypik.ttf') format('woff2');
 }
 
 @font-face {
   font-family: 'text';
-  src: url('/public/beauty angelique.ttf') format('woff2');
+  src: url('beauty angelique.ttf') format('woff2');
 }
 
-/* Hintergrundfarbe mit Animation */
+@font-face {
+  font-family: 'Olupus';
+  src: url('OLOPUS.TTF') format('truetype');
+}
+
+@font-face {
+  font-family: 'Love Script';
+  src: url('Love script.ttf') format('woff2');
+}
+
+@font-face {
+  font-family: 'Butterfly';
+  src: url('AButterflyOnaDaffodil.ttf') format('truetype');
+}
+
 body {
-  animation: backgroundFade 8s linear infinite;
-  background-color: rgb(254, 103, 141, 1);
   margin: 0;
   overflow-y: scroll; /* Scrollbarkeit für den Hauptinhalt */
 }
 
 /* Hintergrund mit nahtlos gespiegelt schwebenden Engeln */
 .angel-background {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/public/enlarge_download.png'), url('/public/enlarge_download.png');
+  background-image: url('enlarge_download.png'), url('enlarge_download.png');
   background-size: auto 100%; /* Füllt die Höhe vollständig aus */
   background-position: center; /* Bild wird zentriert */
   background-repeat: repeat-x; /* Horizontal wiederholen */
@@ -40,7 +52,7 @@ body {
 
 /* Glitzernder Schneefall */
 .snowfall {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -51,7 +63,7 @@ body {
 /* Flexbox für den Inhalt */
 .flex-container {
   position: relative;
-  z-index: 2; /* Über fixiertem Hintergrund */
+  z-index: 2; /* Über 3D-Hintergrund */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,12 +85,12 @@ a:hover {
 
 /* Marquee-Animation */
 .marquee-container {
-  position: fixed;
+  position: absolute;
   z-index: 3;
 }
 
 .marquee {
-  position: fixed;
+  position: absolute;
   white-space: nowrap;
   overflow: hidden;
   font-family: 'Amelina Script';
@@ -141,21 +153,12 @@ a:hover {
 
 /* Titel mit glitzerndem Effekt */
 .title {
-  animation: colorChange 8s linear infinite, floatTitle 4s ease-in-out infinite;
-  font-family: 'Hypik';
-  font-size: 110px;
-  color: white;
+  font-family: 'Butterfly', 'Olupus', 'Love Script', 'Hypik', cursive;
+  font-size: 72px;
   text-align: center;
-  text-shadow: 0 0 10px gold, 0 0 20px pink;
-}
-
-@keyframes colorChange {
-  0%, 100% {
-    color: rgb(251, 251, 251);
-  }
-  50% {
-    color: rgb(196, 164, 249);
-  }
+  color: #000000;
+  text-shadow: none;
+  letter-spacing: 0.16em;
 }
 
 @keyframes floatTitle {
@@ -171,12 +174,189 @@ a:hover {
 .text {
   width: 100%;
   text-align: center;
-  color: rgb(255, 255, 255);
   font-family: 'text';
   font-size: 30px;
   line-height: 1.6;
   animation: floatText 6s ease-in-out infinite;
   margin: 20px 0; /* Abstand für Scrollen */
+  position: relative;
+  /* Klarer Scroll-Verlauf mit Outline */
+  background-image: linear-gradient(
+    120deg,
+    #000000,
+    #5b3a30,
+    #c48ad9,
+    #ffcf6a,
+    #c48ad9,
+    #5b3a30,
+    #000000
+  );
+  background-size: 320% 100%;
+  background-position: calc((var(--scroll-pos, 0) * 0.8px)) 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  -webkit-text-stroke: 0.5px #000000;
+}
+
+.sparkle-char {
+  display: inline-block;
+  color: #000000; /* schwarze Sterne */
+  text-shadow: none;
+  animation: driftSparkle 7s ease-in-out infinite;
+  font-size: 36px;
+  margin: 0 2px;
+}
+
+.sparkle-char.slow {
+  animation: repelSparkle 11s ease-in-out infinite;
+}
+
+.sparkle-char.fast {
+  animation: spinSparkle 3s linear infinite;
+}
+
+.sparkle-char.big {
+  font-size: 46px;
+}
+
+.sparkle-char.comet {
+  position: relative;
+  padding-left: 10px;
+}
+
+.sparkle-char.comet::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 215, 0, 0),
+    rgba(255, 215, 0, 0.9)
+  );
+  transform: translateY(-50%);
+}
+
+@keyframes spinSparkle {
+  0% {
+    transform: rotate(0deg) translateY(0) translateX(0) scale(1);
+  }
+  50% {
+    transform: rotate(260deg) translateY(-8px) translateX(6px) scale(1.15);
+  }
+  100% {
+    transform: rotate(360deg) translateY(0) translateX(0) scale(1);
+  }
+}
+
+@keyframes driftSparkle {
+  0% {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+  25% {
+    transform: translateX(-3px) translateY(-5px) scale(1.05);
+  }
+  50% {
+    transform: translateX(4px) translateY(-2px) scale(0.97);
+  }
+  75% {
+    transform: translateX(-2px) translateY(3px) scale(1.03);
+  }
+  100% {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+}
+
+@keyframes repelSparkle {
+  0% {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+  20% {
+    transform: translateX(-6px) translateY(-10px) scale(1.1);
+  }
+  40% {
+    transform: translateX(8px) translateY(4px) scale(0.95);
+  }
+  60% {
+    transform: translateX(-4px) translateY(8px) scale(1.08);
+  }
+  80% {
+    transform: translateX(5px) translateY(-6px) scale(0.97);
+  }
+  100% {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+}
+
+/* etwas mehr „Zufall“ über unterschiedliche Größen & Geschwindigkeiten */
+.text .sparkle-char:nth-of-type(3n) {
+  font-size: 32px;
+  animation-duration: 4.2s;
+}
+
+.text .sparkle-char:nth-of-type(4n) {
+  font-size: 40px;
+  animation-duration: 6s;
+}
+
+.text .sparkle-char:nth-of-type(5n) {
+  font-size: 50px;
+  animation-duration: 4.3s;
+  animation-timing-function: ease-in-out;
+}
+
+.sparkle-line {
+  display: inline-block;
+}
+
+.spin-line {
+  animation: cometLine 10s ease-in-out infinite;
+}
+
+@keyframes cometLine {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(6px) translateY(-5px) rotate(2deg);
+  }
+  50% {
+    transform: translateX(-8px) translateY(3px) rotate(-3deg);
+  }
+  75% {
+    transform: translateX(4px) translateY(-6px) rotate(1deg);
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+}
+
+/* kleinere, aber unterschiedliche Top-Sterne */
+.top-stars .sparkle-char {
+  font-size: 20px;
+}
+
+.top-stars .sparkle-char:nth-of-type(2n) {
+  font-size: 24px;
+}
+
+.top-stars .sparkle-char:nth-of-type(3) {
+  font-size: 18px;
+}
+@keyframes spinLine {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 @keyframes floatText {
@@ -188,6 +368,8 @@ a:hover {
   }
 }
 
+
+
 /* Schwebende Bilder */
 .image {
   width: 100%;
@@ -195,6 +377,284 @@ a:hover {
   margin: 20px 0; /* Abstand für Scrollen */
 }
 
+/* Startseite (weiße Fläche) */
+.start-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  overflow-y: scroll; /* Scrollbarkeit für den Hauptinhalt */
+  background-color: #ffffff;
+}
+
+.christmas-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
+.start-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.archive-button {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 32px;
+  border: 2px solid #000;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #000;
+  font-family: 'Hypik';
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.archive-button:hover {
+  background-color: #000;
+  color: #ffffff;
+}
+
+.start-regal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  --poster-color: transparent;
+  opacity: 0;
+  animation: fadeInSoft 900ms ease-out forwards;
+}
+
+@media (max-width: 768px) {
+  .start-regal {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+}
+
+.overlay {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 18vh;
+  z-index: 1;
+}
+
+.overlay-inner {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+@keyframes fadeInSoft {
+  0% {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Bilder im Overlay ausblenden (nur Text) */
+.overlay-inner .image {
+  display: none;
+}
+
+.postcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.postcard-card {
+  width: min(60vw, 260px); /* etwas kleiner */
+  aspect-ratio: 3 / 2;     /* proportionale Höhe */
+  perspective: 1200px;
+}
+
+.postcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.postcard-card:hover .postcard-inner {
+  transform: rotateY(180deg);
+}
+
+.postcard-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* füllt die Karte ohne weißen Rand */
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  backface-visibility: hidden;
+}
+
+.postcard-back {
+  transform: rotateY(180deg);
+}
+
+.postcard-video {
+  display: block;
+  width: 55%;
+  max-width: 280px;
+  margin: 16px auto 24px; /* klar zentriert */
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  outline: none;
+  border: none;
+}
+
+.postcard-label {
+  font-family: 'Butterfly', 'Hypik', cursive;
+  font-size: 18px;
+  letter-spacing: 0.16em;
+  color: #000000;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+/* Text im Overlay besser lesbar */
+.overlay-inner .text {
+  color: #000000;
+}
+
+.back-button {
+  margin-top: 18px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  color: #000000;
+  font-family: 'Hypik';
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back-button:hover {
+  background: rgba(255, 0, 140, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 0, 140, 0.6);
+}
+
+/* Layout für Start-Content mit rechter Playlist-Leiste */
+.content-layout {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  pointer-events: none;
+}
+
+.content-main {
+  pointer-events: auto;
+  max-width: 560px;
+  width: auto;
+  text-align: center;
+}
+
+.playlist-sidebar {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  pointer-events: auto;
+}
+
+
+.playlist-sidebar-title {
+  font-family: 'Butterfly', 'Hypik', cursive;
+  font-size: 40px;
+  letter-spacing: 0.18em;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+.playlist-toggle {
+  border: none;
+  background: transparent;
+  padding: 8px 0;
+  font-family: 'Butterfly', 'Hypik', cursive;
+  font-size: 24px;
+  cursor: pointer;
+  color: #000000;
+  text-align: right;
+  transition: color 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
+}
+
+.playlist-toggle.active {
+  color: rgb(255, 0, 140);
+  text-shadow: 0 0 14px rgba(255, 0, 140, 0.7);
+  transform: translateX(-4px);
+}
+
+.playlist-toggle:hover {
+  color: rgb(255, 0, 140);
+  text-shadow: 0 0 10px rgba(255, 0, 140, 0.5);
+}
+
+@media (max-width: 600px) {
+  .playlist-sidebar {
+    position: fixed;
+    top: 16px;
+    right: 12px;
+    transform: none;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 0;
+  }
+
+  .playlist-sidebar-title {
+    font-size: 22px;
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+
+  .playlist-toggle {
+    font-size: 16px;
+    padding: 4px 0;
+  }
+}
+
+.playlist-link {
+  text-decoration: none;
+}
+
+.playlist-link:hover {
+  text-decoration: none;
+}
+
+/* Archiv als Panel auf 1/3 Breite (Desktop) */
 @keyframes angelGlow {
   0%, 100% {
     filter: drop-shadow(0 0 30px rgb(255, 222, 165)) drop-shadow(0 0 30px pink);
@@ -222,4 +682,5 @@ a:hover {
   .text {
     font-size: 20px;
   }
+
 }
