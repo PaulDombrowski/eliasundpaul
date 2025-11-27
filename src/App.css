@@ -1,32 +1,32 @@
 /* Schriftarten */
 @font-face {
   font-family: 'Amelina Script';
-  src: url('Amelina Script.ttf') format('woff2');
+  src: url('./fonts/Amelina Script.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Hypik';
-  src: url('hypik.ttf') format('woff2');
+  src: url('./fonts/hypik.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'text';
-  src: url('beauty angelique.ttf') format('woff2');
+  src: url('./fonts/beauty angelique.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Olupus';
-  src: url('OLOPUS.TTF') format('truetype');
+  src: url('./fonts/OLOPUS.TTF') format('truetype');
 }
 
 @font-face {
   font-family: 'Love Script';
-  src: url('Love script.ttf') format('woff2');
+  src: url('./fonts/Love script.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Butterfly';
-  src: url('AButterflyOnaDaffodil.ttf') format('truetype');
+  src: url('./fonts/AButterflyOnaDaffodil.ttf') format('truetype');
 }
 
 body {
