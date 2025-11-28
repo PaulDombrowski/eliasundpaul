@@ -379,16 +379,18 @@ a:hover {
 
 /* Startseite (weiße Fläche) */
 .start-root {
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: stretch;
   justify-content: stretch;
   position: relative;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
-  overflow-y: scroll; /* Scrollbarkeit für den Hauptinhalt */
+  overflow: hidden; /* Seite selbst nicht scrollen, nur Overlay */
   background-color: #ffffff;
 }
 
@@ -446,12 +448,15 @@ body {
 }
 
 .overlay {
-  position: relative;
+  position: absolute;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: 100vh;
   padding-top: 18vh;
+  box-sizing: border-box;
+  overflow-y: auto; /* nur der Inhalt scrollt */
+  -webkit-overflow-scrolling: touch;
   z-index: 1;
 }
 
