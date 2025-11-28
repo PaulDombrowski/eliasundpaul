@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/eliasundpaul/static/css/main.34229c30.css",
-    "main.js": "/eliasundpaul/static/js/main.3889e3b6.js",
+    "main.css": "/eliasundpaul/static/css/main.4c381878.css",
+    "main.js": "/eliasundpaul/static/js/main.d0fdc442.js",
     "static/js/787.0d43d4e8.chunk.js": "/eliasundpaul/static/js/787.0d43d4e8.chunk.js",
     "static/media/enlarge_download.png": "/eliasundpaul/static/media/enlarge_download.d8b8dfbf5a6822b66fcb.png",
     "static/media/Love script.ttf": "/eliasundpaul/static/media/Love script.6dd96f4ae840c4c2c3cb.ttf",
@@ -11,12 +11,12 @@
     "static/media/hypik.ttf": "/eliasundpaul/static/media/hypik.885d1c1c95f94a4ee623.ttf",
     "static/media/OLOPUS.TTF": "/eliasundpaul/static/media/OLOPUS.9ef7d0cfe860f1f99e32.TTF",
     "index.html": "/eliasundpaul/index.html",
-    "main.34229c30.css.map": "/eliasundpaul/static/css/main.34229c30.css.map",
-    "main.3889e3b6.js.map": "/eliasundpaul/static/js/main.3889e3b6.js.map",
+    "main.4c381878.css.map": "/eliasundpaul/static/css/main.4c381878.css.map",
+    "main.d0fdc442.js.map": "/eliasundpaul/static/js/main.d0fdc442.js.map",
     "787.0d43d4e8.chunk.js.map": "/eliasundpaul/static/js/787.0d43d4e8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.34229c30.css",
-    "static/js/main.3889e3b6.js"
+    "static/css/main.4c381878.css",
+    "static/js/main.d0fdc442.js"
   ]
 }
