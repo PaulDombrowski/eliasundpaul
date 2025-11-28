@@ -154,7 +154,7 @@ a:hover {
 /* Titel mit glitzerndem Effekt */
 .title {
   font-family: 'Butterfly', 'Olupus', 'Love Script', 'Hypik', cursive;
-  font-size: 72px;
+  font-size: clamp(36px, 8vw, 72px);
   text-align: center;
   color: #000000;
   text-shadow: none;
@@ -579,6 +579,11 @@ body {
   text-align: center;
 }
 
+.model-control-toggle {
+  display: none;
+}
+
+
 .playlist-sidebar {
   position: fixed;
   top: 24px;
@@ -676,11 +681,37 @@ body {
 /* Responsive Anpassungen */
 @media (max-width: 600px) {
   .title {
-    font-size: 80px;
+    font-size: 42px;
+    letter-spacing: 0.09em;
   }
 
   .text {
     font-size: 20px;
   }
+}
 
+@media (max-width: 768px) {
+  .model-control-toggle {
+    display: inline-block;
+  }
+
+  .playlist-sidebar-title {
+    font-size: 30px;
+  }
+
+  .playlist-toggle {
+    font-size: 18px;
+  }
+
+  .postcard-card {
+    width: min(80vw, 240px);
+  }
+
+  .postcard-video {
+    width: 70%;
+  }
+
+  .overlay {
+    padding-top: 30vh;
+  }
 }

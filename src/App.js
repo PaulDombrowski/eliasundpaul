@@ -10,17 +10,44 @@ function App() {
     const el = modelRef.current;
     if (!el) return;
 
-    const isSmall = window.innerWidth <= 768;
-
     const duration = 5000;
+    const isSmall = window.innerWidth <= 768;
     const startOrbit = isSmall
-      ? { theta: -26, phi: 26, radius: 110 }
-      : { theta: -28, phi: 28, radius: 120 };
+      ? { theta: -26, phi: 30, radius: 130 }
+      : { theta: -30, phi: 32, radius: 140 };
     const endOrbit = isSmall
-      ? { theta: 36, phi: 22, radius: 65 }
-      : { theta: 40, phi: 22, radius: 70 };
+      ? { theta: 36, phi: 24, radius: 62 }
+      : { theta: 42, phi: 24, radius: 68 };
+
     let frameId;
     let startTime;
+
+    const startContinuousOrbit = () => {
+      // Start sanft von der Endposition der Intro-Animation
+      const basePhi = endOrbit.phi;
+      const theta0 = endOrbit.theta;
+      const baseRadius = endOrbit.radius; // naheliegender Start
+      const amp = isSmall ? 4 : 3; // leichte Atmung
+      const speedDegPerSec = isSmall ? 4 : 3; // langsame Rotation
+      const wobbleSpeed = 0.35;
+      const continuousStart = performance.now();
+
+      const loop = (time) => {
+        const elapsed = (time - continuousStart) / 1000;
+        const theta = theta0 + speedDegPerSec * elapsed;
+        const radius =
+          baseRadius + amp * Math.sin(elapsed * wobbleSpeed);
+
+        el.setAttribute(
+          'camera-orbit',
+          `${theta}deg ${basePhi}deg ${radius}%`
+        );
+
+        frameId = requestAnimationFrame(loop);
+      };
+
+      frameId = requestAnimationFrame(loop);
+    };
 
     const step = (timestamp) => {
       if (!startTime) startTime = timestamp;
@@ -41,11 +68,7 @@ function App() {
       if (progress < 1) {
         frameId = requestAnimationFrame(step);
       } else {
-        el.setAttribute('auto-rotate', '');
-        el.setAttribute(
-          'rotation-per-second',
-          isSmall ? '1.6deg' : '0.8deg'
-        );
+        startContinuousOrbit();
       }
     };
 
