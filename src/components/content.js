@@ -18,14 +18,11 @@ function Content() {
       <div className="content-main">
         {/* Neue Playlist 2025 – nur wenn kein Archivjahr gewählt */}
         {openYear === null && (
-          <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
-            className="playlist-link"
-          >
+          <div className="playlist-link">
             <FancyTitle>
               2025 <br /> luminous shelves of reverie
             </FancyTitle>
+            <PlaylistButton />
             <p className="text">
               <span className="sparkle-line spin-line top-stars">
                 <span className="sparkle-char">✶</span>
@@ -48,6 +45,10 @@ function Content() {
               Enter – MIZU<br />
               Eresver Ni Rehtaf (Edit) – The Vernon Spring, aden<br />
               On My Actual Days – Alabaster DePlume<br />
+              <AngelImage
+                src={process.env.PUBLIC_URL + '/3.png'}
+                alt="Engel 3"
+              />
               Green Breaking – Clark<br />
               The Other Side – These New Puritans<br />
               Red Sun – Anna von Hausswolff<br />
@@ -57,6 +58,12 @@ function Content() {
               Silent Union – NYX<br />
               The Hollow – Keeley Forsyth<br />
               Dolore di Orsini – Anna von Hausswolff<br />
+              <span className="sparkle-line spin-line top-stars">
+                <span className="sparkle-char">✶</span>
+                <span className="sparkle-char">❄</span>
+                <span className="sparkle-char">✧</span>
+              </span>
+              <br />
               More finishes other things – Mhm<br />
               Ways Regained – Pye Corner Audio<br />
               Night / Sea – Pyur<br />
@@ -85,20 +92,22 @@ function Content() {
               Swirling Like A Rocket – Torus<br />
               Masked Ball – 1999 Extended Mix – Jocelyn Pook<br />
               hindsight – Angie Halliwell, Js Donny<br />
+              <AngelImage
+                src={process.env.PUBLIC_URL + '/4.png'}
+                alt="Engel 4"
+                variant="big"
+              />
             </p>
-          </a>
+          </div>
         )}
 
         {/* Ausgewählte alte Playlist */}
         {openYear === 2025 && (
-          <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
-            className="playlist-link"
-          >
+          <div className="playlist-link">
             <FancyTitle>
               2025 <br /> luminous shelves of reverie
             </FancyTitle>
+            <PlaylistButton />
             <p className="text">
               Onos – Travis Lake<br />
               <span className="sparkle-line spin-line top-stars">
@@ -110,6 +119,10 @@ function Content() {
                 <span className="sparkle-char">✶</span>
               </span>
               <br />
+              <AngelImage
+                src={process.env.PUBLIC_URL + '/3.png'}
+                alt="Engel 3"
+              />
               Your absence, like rain, opens the light, infinite – Duncan
               Bellamy, BZDB, MA.MOYO<br />
               Sickly, Sweetly, Summer Movie – Lone<br />
@@ -158,6 +171,10 @@ function Content() {
               Swirling Like A Rocket – Torus<br />
               Masked Ball – 1999 Extended Mix – Jocelyn Pook<br />
               hindsight – Angie Halliwell, Js Donny<br />
+              <AngelImage
+                src={process.env.PUBLIC_URL + '/4.png'}
+                alt="Engel 4"
+              />
             </p>
             <button
               type="button"
@@ -166,37 +183,22 @@ function Content() {
             >
               zurück zur neuen Playlist
             </button>
-          </a>
+          </div>
         )}
 
         {openYear === 2024 && (
-          <a
-            href="https://open.spotify.com/playlist/1Y8WvSQlEhZDeFoPmQM6Os?si=ad8324c1898b48d8"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="playlist-link"
-          >
+          <div className="playlist-link">
             <FancyTitle>
               2024 <br /> U MIGHT BE THE REASON FOR THE CHRISTMAS SEASON
             </FancyTitle>
-
+            <PlaylistButton href="https://open.spotify.com/playlist/1Y8WvSQlEhZDeFoPmQM6Os?si=ad8324c1898b48d8" />
             <p className="postcard-label">Postkarte</p>
-            <div className="postcard">
-              <div className="postcard-card">
-                <div className="postcard-inner">
-                  <img
-                    className="postcard-face"
-                    src={process.env.PUBLIC_URL + '/2024v.jpg'}
-                    alt="2024 Postkarte Vorderseite"
-                  />
-                  <img
-                    className="postcard-face postcard-back"
-                    src={process.env.PUBLIC_URL + '/2024r.jpg'}
-                    alt="2024 Postkarte Rückseite"
-                  />
-                </div>
-              </div>
-            </div>
+            <ScrollFlipCard
+              front={process.env.PUBLIC_URL + '/2024v.jpg'}
+              back={process.env.PUBLIC_URL + '/2024r.jpg'}
+              altFront="2024 Postkarte Vorderseite"
+              altBack="2024 Postkarte Rückseite"
+            />
 
             <p className="text">
               YULLOLA - Blessed Obsessed<br />
@@ -258,37 +260,22 @@ function Content() {
             >
               zurück zur neuen Playlist
             </button>
-          </a>
+          </div>
         )}
 
         {openYear === 2023 && (
-          <a
-            href="https://open.spotify.com/playlist/5rDEvWjqxY1HIkLZ6ebw4i?si=a02c2377804c4566"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="playlist-link"
-          >
+          <div className="playlist-link">
             <FancyTitle>
               2023 <br /> House of Cherubim
             </FancyTitle>
-
+            <PlaylistButton href="https://open.spotify.com/playlist/5rDEvWjqxY1HIkLZ6ebw4i?si=a02c2377804c4566" />
             <p className="postcard-label">Postkarte</p>
-            <div className="postcard">
-              <div className="postcard-card">
-                <div className="postcard-inner">
-                  <img
-                    className="postcard-face"
-                    src={process.env.PUBLIC_URL + '/2023v.jpg'}
-                    alt="2023 Postkarte Vorderseite"
-                  />
-                  <img
-                    className="postcard-face postcard-back"
-                    src={process.env.PUBLIC_URL + '/2023r.jpg'}
-                    alt="2023 Postkarte Rückseite"
-                  />
-                </div>
-              </div>
-            </div>
+            <ScrollFlipCard
+              front={process.env.PUBLIC_URL + '/2023v.jpg'}
+              back={process.env.PUBLIC_URL + '/2023r.jpg'}
+              altFront="2023 Postkarte Vorderseite"
+              altBack="2023 Postkarte Rückseite"
+            />
 
             <p className="text">
               Bby Eco - *seeding* <br />
@@ -339,19 +326,15 @@ function Content() {
             >
               zurück zur neuen Playlist
             </button>
-          </a>
+          </div>
         )}
 
         {openYear === 2022 && (
-          <a
-            href="https://open.spotify.com/playlist/4A7XXZMGnOdX1mOrsofQyw?si=2d74216f8a4748da"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="playlist-link"
-          >
+          <div className="playlist-link">
             <FancyTitle>
               2022 <br /> All Caroling (oh,ah,oh)
             </FancyTitle>
+            <PlaylistButton href="https://open.spotify.com/playlist/4A7XXZMGnOdX1mOrsofQyw?si=2d74216f8a4748da" />
             <p className="text">
               Plaid - Perspex<br />
               Oxhy - latest nights<br />
@@ -378,19 +361,15 @@ function Content() {
             >
               zurück zur neuen Playlist
             </button>
-          </a>
+          </div>
         )}
 
         {openYear === 2021 && (
-          <a
-            href="https://open.spotify.com/playlist/3DQpDTb8kCe4gxNfOAg776?si=c3c2300d10ab4cde"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="playlist-link"
-          >
+          <div className="playlist-link">
             <FancyTitle>
               2021 <br /> If I was a DJ sent from heaven to heal you
             </FancyTitle>
+            <PlaylistButton href="https://open.spotify.com/playlist/3DQpDTb8kCe4gxNfOAg776?si=c3c2300d10ab4cde" />
             <p className="text">
               Ian William Craig - Before Meaning Comes<br />
               Samuel Organ - Kindness<br />
@@ -421,7 +400,7 @@ function Content() {
             >
               zurück zur neuen Playlist
             </button>
-          </a>
+          </div>
         )}
       </div>
 
@@ -463,27 +442,90 @@ function Content() {
 }
 
 function FancyTitle({ children }) {
-  const { scrollY } = useScroll();
-  const skewX = useTransform(scrollY, [0, 400, 800], [-4, 0, 4]);
-  const y = useTransform(scrollY, [0, 600], [0, -10]);
-  const scaleX = useTransform(scrollY, [0, 500, 1000], [1, 1.25, 0.95]);
-  const scaleY = useTransform(scrollY, [0, 500, 1000], [1, 0.9, 1.15]);
-  const rotate = useTransform(scrollY, [0, 700, 1400], [0, 3, -3]);
+  // Normalisiertes Scroll-Profil (0–1) für einen klaren, sichtbaren Effekt
+  const { scrollYProgress } = useScroll();
+
+  // Deutliche, aber weiche Verzerrung: der Titel „wogt“ beim Scrollen
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -18, 6]);
+  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [0, 10, -8]);
+  const skewX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -4, 4]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.08, 0.96]);
+  const letterSpacing = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.18, 0.26, 0.14]
+  );
 
   return (
     <motion.h1
       className="title"
       style={{
+        rotateX,
+        rotateY,
         skewX,
-        y,
-        scaleX,
-        scaleY,
-        rotate,
+        scale,
+        letterSpacing,
+        transformOrigin: 'center',
       }}
-      transition={{ type: 'spring', stiffness: 60, damping: 18 }}
+      transition={{ type: 'spring', stiffness: 60, damping: 20 }}
     >
       {children}
     </motion.h1>
+  );
+}
+
+function AngelImage({ src, alt, variant }) {
+  const { scrollY } = useScroll();
+  const range = variant === 'big' ? [0, 300, 600] : [0, 400, 800];
+  const scaleX = useTransform(scrollY, range, [1, -1, 1]);
+  const y = useTransform(scrollY, [0, 400], [0, -10]);
+  const rotate = useTransform(scrollY, [0, 500, 1000], [0, 10, -6]);
+
+  const baseWidth = variant === 'big' ? 260 : 140;
+  const maxWidth = variant === 'big' ? '80%' : '50%';
+
+  return (
+    <motion.img
+      className="angel-inline"
+      src={src}
+      alt={alt}
+      style={{ scaleX, y, rotate, width: baseWidth, maxWidth }}
+    />
+  );
+}
+
+function PlaylistButton({ label = 'Zur Playlist', href = '#' }) {
+  return (
+    <a
+      className="playlist-button"
+      href={href}
+      target={href === '#' ? undefined : '_blank'}
+      rel={href === '#' ? undefined : 'noopener noreferrer'}
+    >
+      {label}
+    </a>
+  );
+}
+
+function ScrollFlipCard({ front, back, altFront, altBack }) {
+  const { scrollYProgress } = useScroll();
+  // Scroll-basierter Flip: bei ~ halber Seite einmal gedreht, darüber hinaus weiter
+  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [0, 180, 360]);
+
+  return (
+    <div className="postcard">
+      <div className="postcard-card">
+        <motion.div
+          className="postcard-inner"
+          style={{ rotateY }}
+          whileHover={{ rotateY: 180 }}
+          transition={{ type: 'spring', stiffness: 80, damping: 18 }}
+        >
+          <img className="postcard-face" src={front} alt={altFront} />
+          <img className="postcard-face postcard-back" src={back} alt={altBack} />
+        </motion.div>
+      </div>
+    </div>
   );
 }
 

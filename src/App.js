@@ -13,10 +13,10 @@ function App() {
     const duration = 5000;
     const isSmall = window.innerWidth <= 768;
     const startOrbit = isSmall
-      ? { theta: -26, phi: 30, radius: 130 }
+      ? { theta: -26, phi: 30, radius: 110 } // mobiler Start etwas näher
       : { theta: -30, phi: 32, radius: 140 };
     const endOrbit = isSmall
-      ? { theta: 36, phi: 24, radius: 62 }
+      ? { theta: 36, phi: 24, radius: 52 } // mobiler Endpunkt deutlich näher
       : { theta: 42, phi: 24, radius: 68 };
 
     let frameId;
@@ -26,7 +26,7 @@ function App() {
       // Start sanft von der Endposition der Intro-Animation
       const basePhi = endOrbit.phi;
       const theta0 = endOrbit.theta;
-      const baseRadius = endOrbit.radius; // naheliegender Start
+      const baseRadius = isSmall ? 48 : endOrbit.radius; // auf kleinen Screens noch näher dran
       const amp = isSmall ? 4 : 3; // leichte Atmung
       const speedDegPerSec = isSmall ? 4 : 3; // langsame Rotation
       const wobbleSpeed = 0.35;
