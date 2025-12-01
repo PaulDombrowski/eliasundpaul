@@ -20,9 +20,17 @@ function Content() {
         {openYear === null && (
           <div className="playlist-link">
             <FancyTitle>
-              2025 <br /> luminous shelves of reverie
+              2025 <br /> strumming your heart with sugarcoated christmas reveries
             </FancyTitle>
             <PlaylistButton />
+            <p className="postcard-label">Postkarte</p>
+            <ScrollFlipCard
+              front={process.env.PUBLIC_URL + '/2025v.png'}
+              back={process.env.PUBLIC_URL + '/2025h.png'}
+              altFront="2025 Postkarte Vorderseite"
+              altBack="2025 Postkarte Rückseite"
+              portrait
+            />
             <p className="text">
               <span className="sparkle-line spin-line top-stars">
                 <span className="sparkle-char">✶</span>
@@ -105,9 +113,17 @@ function Content() {
         {openYear === 2025 && (
           <div className="playlist-link">
             <FancyTitle>
-              2025 <br /> luminous shelves of reverie
+              2025 <br /> strumming your heart with sugarcoated christmas reveries
             </FancyTitle>
             <PlaylistButton />
+            <p className="postcard-label">Postkarte</p>
+            <ScrollFlipCard
+              front={process.env.PUBLIC_URL + '/2025v.png'}
+              back={process.env.PUBLIC_URL + '/2025h.png'}
+              altFront="2025 Postkarte Vorderseite"
+              altBack="2025 Postkarte Rückseite"
+              portrait
+            />
             <p className="text">
               Onos – Travis Lake<br />
               <span className="sparkle-line spin-line top-stars">
@@ -507,14 +523,14 @@ function PlaylistButton({ label = 'Zur Playlist', href = '#' }) {
   );
 }
 
-function ScrollFlipCard({ front, back, altFront, altBack }) {
+function ScrollFlipCard({ front, back, altFront, altBack, portrait = false }) {
   const { scrollYProgress } = useScroll();
   // Scroll-basierter Flip: bei ~ halber Seite einmal gedreht, darüber hinaus weiter
   const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [0, 180, 360]);
 
   return (
     <div className="postcard">
-      <div className="postcard-card">
+      <div className={`postcard-card ${portrait ? 'postcard-card-portrait' : ''}`}>
         <motion.div
           className="postcard-inner"
           style={{ rotateY }}
