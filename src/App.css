@@ -159,16 +159,7 @@ a:hover {
   color: #000000;
   text-shadow: none;
   letter-spacing: 0.16em;
-  animation: floatTitle 4s ease-in-out infinite;
-}
-
-@keyframes floatTitle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.1);
-  }
+  will-change: transform, text-shadow;
 }
 
 /* Textbereich */
@@ -567,6 +558,7 @@ body {
 }
 
 .playlist-button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -574,19 +566,48 @@ body {
   padding: 12px 28px;
   border-radius: 999px; /* stark abgerundete Ecken */
   border: 2px solid #000000;
-  background: #000000; /* komplett schwarz */
-  font-family: 'Butterfly', 'Hypik', cursive;
-  font-size: 20px;
-  letter-spacing: 0.16em;
+  background: #000000;
+  background-size: 200% 200%; /* für Hover-Animation */
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: clamp(17px, 2vw, 19px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
   box-shadow: none;
   color: #ffffff; /* weiße Schrift auf schwarz */
   text-decoration: none;
+  overflow: hidden; /* für den Shine-Effekt */
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    letter-spacing 0.25s ease,
+    background-position 0.45s ease,
+    background 0.25s ease;
+}
+
+.playlist-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 248, 200, 0.16), transparent 45%),
+    radial-gradient(circle at 80% 40%, rgba(255, 236, 170, 0.12), transparent 50%);
+  opacity: 0;
+  transform: translateX(-14%);
+  transition: opacity 0.3s ease, transform 0.45s ease;
 }
 
 .playlist-button:hover {
-  background: #222222;
+  background: #0c0c0c;
+  background-position: 80% 20%;
+  transform: translateY(-1px) scale(1.01) rotate(-0.5deg);
+  box-shadow: 0 10px 26px rgba(255, 231, 140, 0.24), 0 4px 12px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.16em;
+}
+
+.playlist-button:hover::before {
+  opacity: 1;
+  transform: translateX(10%);
 }
 
 /* Text im Overlay besser lesbar */

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import '../App.css';
 
@@ -13,194 +13,114 @@ function Content() {
     setOpenYear(null);
   };
 
+  const render2025 = (withBackButton = false) => (
+    <div className="playlist-link">
+      <FancyTitle>
+        2025 <br /> we prayed to archangel algorithm for sugarcoated reveries
+      </FancyTitle>
+      <PlaylistButton href="https://open.spotify.com/playlist/0E7NMDAxrEIz2vvQGgUUJq?si=ba14e73aeaf847b6" />
+      <p className="postcard-label">Postkarte</p>
+      <ScrollFlipCard
+        front={process.env.PUBLIC_URL + '/2025v.png'}
+        back={process.env.PUBLIC_URL + '/2025h.png'}
+        altFront="2025 Postkarte Vorderseite"
+        altBack="2025 Postkarte Rückseite"
+        portrait
+      />
+      <p className="text">
+        <span className="sparkle-line spin-line top-stars">
+          <span className="sparkle-char">✶</span>
+          <span className="sparkle-char">✧</span>
+          <span className="sparkle-char">❄</span>
+          <span className="sparkle-char">✶</span>
+          <span className="sparkle-char">✧</span>
+          <span className="sparkle-char">✶</span>
+        </span>
+        <br />
+        Onos – Travis Lake<br />
+        Your absence, like rain, opens the light, infinite – Duncan Bellamy,
+        BZDB, MA.MOYO<br />
+        Sickly, Sweetly, Summer Movie – Lone<br />
+        Space Inside Your Mind – Nico Niquo<br />
+        A Moment Set Aside – Max Cooper, Rob Clouth<br />
+        Reprise – DJRUM, Zosia Jagodzinska<br />
+        Fire Leap – NYX, Gazelle Twin<br />
+        Dream Baby Dream – NYX<br />
+        Enter – MIZU<br />
+        Eresver Ni Rehtaf (Edit) – The Vernon Spring, aden<br />
+        On My Actual Days – Alabaster DePlume<br />
+        <AngelImage
+          src={process.env.PUBLIC_URL + '/3.png'}
+          alt="Engel 3"
+        />
+        Green Breaking – Clark<br />
+        The Other Side – These New Puritans<br />
+        Red Sun – Anna von Hausswolff<br />
+        Gifts for the Surgeon – Wojciech Rusin<br />
+        Escorial – μ-Ziq<br />
+        * . . * – NAIMA<br />
+        Silent Union – NYX<br />
+        The Hollow – Keeley Forsyth<br />
+        Dolore di Orsini – Anna von Hausswolff<br />
+        <span className="sparkle-line spin-line top-stars">
+          <span className="sparkle-char">✶</span>
+          <span className="sparkle-char">❄</span>
+          <span className="sparkle-char">✧</span>
+        </span>
+        <br />
+        More finishes other things – Mhm<br />
+        Ways Regained – Pye Corner Audio<br />
+        Night / Sea – Pyur<br />
+        Lazria – Travis Lake<br />
+        Pescado – Vanessa Amara<br />
+        Waiting for Sleep – Single Version – Jungstötter, Isabelle Pabst<br />
+        Two Trains Came Through the Station at Once and It Felt Like a
+        Hurricane – Dylan Henner<br />
+        Eyes – Asea Bedoret<br />
+        Industrial Love Song – These New Puritans, Caroline Polachek<br />
+        Gaviotas – Rival Consoles<br />
+        Left For Tomorrow – Perfume Genius<br />
+        The Secret Garden – μ-Ziq, Mrs Jynx<br />
+        How Bright You Are – Mikey Enwright, Oklou<br />
+        Barwa I – Pejzaż<br />
+        Biafra – Tony Njoku<br />
+        Elemental Fear – Noémi Büchi<br />
+        Fair Enough – Noémi Büchi, Joséphine de Weck<br />
+        Ascending – The Nunnery<br />
+        When I choose to be here with you – Tracey<br />
+        Alyosha Lying – Clark<br />
+        Flesh Eater – Wojciech Rusin<br />
+        Photograph – Keeley Forsyth<br />
+        Clouds – Lucy Gooch<br />
+        Swirling Like A Rocket – Torus<br />
+        Masked Ball – 1999 Extended Mix – Jocelyn Pook<br />
+        hindsight – Angie Halliwell, Js Donny<br />
+        <AngelImage
+          src={process.env.PUBLIC_URL + '/4.png'}
+          alt="Engel 4"
+          variant="big"
+        />
+      </p>
+      {withBackButton && (
+        <button
+          type="button"
+          className="back-button"
+          onClick={goBackToNew}
+        >
+          zurück zur neuen Playlist
+        </button>
+      )}
+    </div>
+  );
+
   return (
     <div className="content-layout">
       <div className="content-main">
         {/* Neue Playlist 2025 – nur wenn kein Archivjahr gewählt */}
-        {openYear === null && (
-          <div className="playlist-link">
-            <FancyTitle>
-              2025 <br /> strumming your heart with sugarcoated christmas reveries
-            </FancyTitle>
-            <PlaylistButton />
-            <p className="postcard-label">Postkarte</p>
-            <ScrollFlipCard
-              front={process.env.PUBLIC_URL + '/2025v.png'}
-              back={process.env.PUBLIC_URL + '/2025h.png'}
-              altFront="2025 Postkarte Vorderseite"
-              altBack="2025 Postkarte Rückseite"
-              portrait
-            />
-            <p className="text">
-              <span className="sparkle-line spin-line top-stars">
-                <span className="sparkle-char">✶</span>
-                <span className="sparkle-char">✧</span>
-                <span className="sparkle-char">❄</span>
-                <span className="sparkle-char">✶</span>
-                <span className="sparkle-char">✧</span>
-                <span className="sparkle-char">✶</span>
-              </span>
-              <br />
-              Onos – Travis Lake<br />
-              Your absence, like rain, opens the light, infinite – Duncan
-              Bellamy, BZDB, MA.MOYO<br />
-              Sickly, Sweetly, Summer Movie – Lone<br />
-              Space Inside Your Mind – Nico Niquo<br />
-              A Moment Set Aside – Max Cooper, Rob Clouth<br />
-              Reprise – DJRUM, Zosia Jagodzinska<br />
-              Fire Leap – NYX, Gazelle Twin<br />
-              Dream Baby Dream – NYX<br />
-              Enter – MIZU<br />
-              Eresver Ni Rehtaf (Edit) – The Vernon Spring, aden<br />
-              On My Actual Days – Alabaster DePlume<br />
-              <AngelImage
-                src={process.env.PUBLIC_URL + '/3.png'}
-                alt="Engel 3"
-              />
-              Green Breaking – Clark<br />
-              The Other Side – These New Puritans<br />
-              Red Sun – Anna von Hausswolff<br />
-              Gifts for the Surgeon – Wojciech Rusin<br />
-              Escorial – μ-Ziq<br />
-              * . . * – NAIMA<br />
-              Silent Union – NYX<br />
-              The Hollow – Keeley Forsyth<br />
-              Dolore di Orsini – Anna von Hausswolff<br />
-              <span className="sparkle-line spin-line top-stars">
-                <span className="sparkle-char">✶</span>
-                <span className="sparkle-char">❄</span>
-                <span className="sparkle-char">✧</span>
-              </span>
-              <br />
-              More finishes other things – Mhm<br />
-              Ways Regained – Pye Corner Audio<br />
-              Night / Sea – Pyur<br />
-              Lazria – Travis Lake<br />
-              Pescado – Vanessa Amara<br />
-              Waiting for Sleep – Single Version – Jungstötter, Isabelle
-              Pabst<br />
-              Two Trains Came Through the Station at Once and It Felt Like a
-              Hurricane – Dylan Henner<br />
-              Eyes – Asea Bedoret<br />
-              Industrial Love Song – These New Puritans, Caroline Polachek<br />
-              Gaviotas – Rival Consoles<br />
-              Left For Tomorrow – Perfume Genius<br />
-              The Secret Garden – μ-Ziq, Mrs Jynx<br />
-              How Bright You Are – Mikey Enwright, Oklou<br />
-              Barwa I – Pejzaż<br />
-              Biafra – Tony Njoku<br />
-              Elemental Fear – Noémi Büchi<br />
-              Fair Enough – Noémi Büchi, Joséphine de Weck<br />
-              Ascending – The Nunnery<br />
-              When I choose to be here with you – Tracey<br />
-              Alyosha Lying – Clark<br />
-              Flesh Eater – Wojciech Rusin<br />
-              Photograph – Keeley Forsyth<br />
-              Clouds – Lucy Gooch<br />
-              Swirling Like A Rocket – Torus<br />
-              Masked Ball – 1999 Extended Mix – Jocelyn Pook<br />
-              hindsight – Angie Halliwell, Js Donny<br />
-              <AngelImage
-                src={process.env.PUBLIC_URL + '/4.png'}
-                alt="Engel 4"
-                variant="big"
-              />
-            </p>
-          </div>
-        )}
+        {openYear === null && render2025()}
 
         {/* Ausgewählte alte Playlist */}
-        {openYear === 2025 && (
-          <div className="playlist-link">
-            <FancyTitle>
-              2025 <br /> strumming your heart with sugarcoated christmas reveries
-            </FancyTitle>
-            <PlaylistButton />
-            <p className="postcard-label">Postkarte</p>
-            <ScrollFlipCard
-              front={process.env.PUBLIC_URL + '/2025v.png'}
-              back={process.env.PUBLIC_URL + '/2025h.png'}
-              altFront="2025 Postkarte Vorderseite"
-              altBack="2025 Postkarte Rückseite"
-              portrait
-            />
-            <p className="text">
-              Onos – Travis Lake<br />
-              <span className="sparkle-line spin-line top-stars">
-                <span className="sparkle-char">✶</span>
-                <span className="sparkle-char">✧</span>
-                <span className="sparkle-char">❄</span>
-                <span className="sparkle-char">✶</span>
-                <span className="sparkle-char">✧</span>
-                <span className="sparkle-char">✶</span>
-              </span>
-              <br />
-              <AngelImage
-                src={process.env.PUBLIC_URL + '/3.png'}
-                alt="Engel 3"
-              />
-              Your absence, like rain, opens the light, infinite – Duncan
-              Bellamy, BZDB, MA.MOYO<br />
-              Sickly, Sweetly, Summer Movie – Lone<br />
-              Space Inside Your Mind – Nico Niquo<br />
-              A Moment Set Aside – Max Cooper, Rob Clouth<br />
-              Reprise – DJRUM, Zosia Jagodzinska<br />
-              Fire Leap – NYX, Gazelle Twin<br />
-              Dream Baby Dream – NYX<br />
-              Enter – MIZU<br />
-              Eresver Ni Rehtaf (Edit) – The Vernon Spring, aden<br />
-              On My Actual Days – Alabaster DePlume<br />
-              Green Breaking – Clark<br />
-              The Other Side – These New Puritans<br />
-              Red Sun – Anna von Hausswolff<br />
-              Gifts for the Surgeon – Wojciech Rusin<br />
-              Escorial – μ-Ziq<br />
-              * . . * – NAIMA<br />
-              Silent Union – NYX<br />
-              The Hollow – Keeley Forsyth<br />
-              Dolore di Orsini – Anna von Hausswolff<br />
-              More finishes other things – Mhm<br />
-              Ways Regained – Pye Corner Audio<br />
-              Night / Sea – Pyur<br />
-              Lazria – Travis Lake<br />
-              Pescado – Vanessa Amara<br />
-              Waiting for Sleep – Single Version – Jungstötter, Isabelle
-              Pabst<br />
-              Two Trains Came Through the Station at Once and It Felt Like a
-              Hurricane – Dylan Henner<br />
-              Eyes – Asea Bedoret<br />
-              Industrial Love Song – These New Puritans, Caroline Polachek<br />
-              Gaviotas – Rival Consoles<br />
-              Left For Tomorrow – Perfume Genius<br />
-              The Secret Garden – μ-Ziq, Mrs Jynx<br />
-              How Bright You Are – Mikey Enwright, Oklou<br />
-              Barwa I – Pejzaż<br />
-              Biafra – Tony Njoku<br />
-              Elemental Fear – Noémi Büchi<br />
-              Fair Enough – Noémi Büchi, Joséphine de Weck<br />
-              Ascending – The Nunnery<br />
-              When I choose to be here with you – Tracey<br />
-              Alyosha Lying – Clark<br />
-              Flesh Eater – Wojciech Rusin<br />
-              Photograph – Keeley Forsyth<br />
-              Clouds – Lucy Gooch<br />
-              Swirling Like A Rocket – Torus<br />
-              Masked Ball – 1999 Extended Mix – Jocelyn Pook<br />
-              hindsight – Angie Halliwell, Js Donny<br />
-              <AngelImage
-                src={process.env.PUBLIC_URL + '/4.png'}
-                alt="Engel 4"
-              />
-            </p>
-            <button
-              type="button"
-              className="back-button"
-              onClick={goBackToNew}
-            >
-              zurück zur neuen Playlist
-            </button>
-          </div>
-        )}
+        {openYear === 2025 && render2025(true)}
 
         {openYear === 2024 && (
           <div className="playlist-link">
@@ -458,32 +378,35 @@ function Content() {
 }
 
 function FancyTitle({ children }) {
-  // Normalisiertes Scroll-Profil (0–1) für einen klaren, sichtbaren Effekt
-  const { scrollYProgress } = useScroll();
+  const titleRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: titleRef,
+    offset: ['start 80%', 'end 20%'],
+  });
 
-  // Deutliche, aber weiche Verzerrung: der Titel „wogt“ beim Scrollen
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -18, 6]);
-  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [0, 10, -8]);
-  const skewX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -4, 4]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.08, 0.96]);
-  const letterSpacing = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [0.18, 0.26, 0.14]
-  );
+  // Scroll schrumpft den Titel leicht zusammen, ohne heftigen Shadow/Glow
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], [0, -12, -6]);
+  const x = useTransform(scrollYProgress, [0, 0.5, 1], [0, 6, -4]);
+  const rotateZ = useTransform(scrollYProgress, [0, 0.5, 1], [0, -2.5, -1]);
+  const skewX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -4, -2]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.04, 0.9, 0.94]);
+  const letterSpacing = useTransform(scrollYProgress, [0, 0.5, 1], ['0.18em', '0.12em', '0.14em']);
 
   return (
     <motion.h1
       className="title"
+      ref={titleRef}
       style={{
-        rotateX,
-        rotateY,
+        y,
+        x,
+        rotateZ,
         skewX,
         scale,
         letterSpacing,
         transformOrigin: 'center',
+        translateZ: 0,
       }}
-      transition={{ type: 'spring', stiffness: 60, damping: 20 }}
+      transition={{ type: 'spring', stiffness: 55, damping: 18 }}
     >
       {children}
     </motion.h1>
