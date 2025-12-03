@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import '../App.css';
 
@@ -16,7 +16,7 @@ function Content() {
   const render2025 = (withBackButton = false) => (
     <div className="playlist-link">
       <FancyTitle>
-        2025 <br /> we prayed to archangel algorithm for sugarcoated reveries
+        2025 <br /> we prayed to archangel algorithm for sugarcoated christmas reveries
       </FancyTitle>
       <PlaylistButton href="https://open.spotify.com/playlist/0E7NMDAxrEIz2vvQGgUUJq?si=ba14e73aeaf847b6" />
       <p className="postcard-label">Postkarte</p>
@@ -378,24 +378,19 @@ function Content() {
 }
 
 function FancyTitle({ children }) {
-  const titleRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: titleRef,
-    offset: ['start 80%', 'end 20%'],
-  });
+  const { scrollYProgress } = useScroll();
 
-  // Scroll schrumpft den Titel leicht zusammen, ohne heftigen Shadow/Glow
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [0, -12, -6]);
-  const x = useTransform(scrollYProgress, [0, 0.5, 1], [0, 6, -4]);
-  const rotateZ = useTransform(scrollYProgress, [0, 0.5, 1], [0, -2.5, -1]);
-  const skewX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -4, -2]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.04, 0.9, 0.94]);
-  const letterSpacing = useTransform(scrollYProgress, [0, 0.5, 1], ['0.18em', '0.12em', '0.14em']);
+  // Deutliche, aber begrenzte Verzerrung über den gesamten Scrollbereich
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], [0, -38, 12]);
+  const x = useTransform(scrollYProgress, [0, 0.5, 1], [0, 24, -18]);
+  const rotateZ = useTransform(scrollYProgress, [0, 0.5, 1], [0, -10, 6]);
+  const skewX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -12, 10]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.28, 1.02]);
+  const letterSpacing = useTransform(scrollYProgress, [0, 0.5, 1], ['0.16em', '0.36em', '0.22em']);
 
   return (
     <motion.h1
       className="title"
-      ref={titleRef}
       style={{
         y,
         x,

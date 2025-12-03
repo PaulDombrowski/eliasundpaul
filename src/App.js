@@ -10,6 +10,10 @@ function App() {
     const el = modelRef.current;
     if (!el) return;
 
+    const isIOS =
+      typeof navigator !== 'undefined' &&
+      /iPad|iPhone|iPod/.test(navigator.userAgent);
+
     const duration = 5000;
     const isSmall = window.innerWidth <= 768;
     const startOrbit = isSmall
@@ -20,7 +24,13 @@ function App() {
       : { theta: 42, phi: 24, radius: 68 };
 
     let frameId;
+    let intervalId;
     let startTime;
+
+    const clearTimers = () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      if (intervalId) clearInterval(intervalId);
+    };
 
     const startContinuousOrbit = () => {
       // Start sanft von der Endposition der Intro-Animation
@@ -32,8 +42,7 @@ function App() {
       const wobbleSpeed = 0.35;
       const continuousStart = performance.now();
 
-      const loop = (time) => {
-        const elapsed = (time - continuousStart) / 1000;
+      const tick = (elapsed) => {
         const theta = theta0 + speedDegPerSec * elapsed;
         const radius =
           baseRadius + amp * Math.sin(elapsed * wobbleSpeed);
@@ -42,11 +51,23 @@ function App() {
           'camera-orbit',
           `${theta}deg ${basePhi}deg ${radius}%`
         );
-
-        frameId = requestAnimationFrame(loop);
       };
 
-      frameId = requestAnimationFrame(loop);
+      if (isIOS) {
+        // On iOS throttle updates to reduce WebGL + RAF pressure
+        const iosStart = Date.now();
+        intervalId = setInterval(() => {
+          const elapsed = (Date.now() - iosStart) / 1000;
+          tick(elapsed);
+        }, 350);
+      } else {
+        const loop = (time) => {
+          const elapsed = (time - continuousStart) / 1000;
+          tick(elapsed);
+          frameId = requestAnimationFrame(loop);
+        };
+        frameId = requestAnimationFrame(loop);
+      }
     };
 
     const step = (timestamp) => {
@@ -67,7 +88,7 @@ function App() {
 
       if (progress < 1) {
         frameId = requestAnimationFrame(step);
-      } else {
+      } else if (allowContinuousOrbit) {
         startContinuousOrbit();
       }
     };
@@ -75,7 +96,7 @@ function App() {
     frameId = requestAnimationFrame(step);
 
     return () => {
-      if (frameId) cancelAnimationFrame(frameId);
+      clearTimers();
     };
   }, []);
 
