@@ -88,7 +88,7 @@ function App() {
 
       if (progress < 1) {
         frameId = requestAnimationFrame(step);
-      } else if (allowContinuousOrbit) {
+      } else {
         startContinuousOrbit();
       }
     };
