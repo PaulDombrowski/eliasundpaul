@@ -40,61 +40,50 @@ function Content() {
         Onos – Travis Lake<br />
         Your absence, like rain, opens the light, infinite – Duncan Bellamy,
         BZDB, MA.MOYO<br />
+        Dust That Floats – Isabelle Lewis, Valgeir Sigurðsson, Benjamin Abel
+        Meirhaeghe, Elisabeth Klinck<br />
         Sickly, Sweetly, Summer Movie – Lone<br />
-        Space Inside Your Mind – Nico Niquo<br />
-        A Moment Set Aside – Max Cooper, Rob Clouth<br />
-        Reprise – DJRUM, Zosia Jagodzinska<br />
-        Fire Leap – NYX, Gazelle Twin<br />
+        Eserver Ni Rehtaf (Edit) – The Vernon Spring, aden<br />
         Dream Baby Dream – NYX<br />
         Enter – MIZU<br />
-        Eresver Ni Rehtaf (Edit) – The Vernon Spring, aden<br />
-        On My Actual Days – Alabaster DePlume<br />
+        Gifts for the Surgeon – Wojciech Rusin<br />
+        Fire Leap – NYX, Gazelle Twin<br />
+        * . . * – NAIMA<br />
+        Red Sun – Anna von Hausswolff<br />
+        Space Inside Your Mind – Nico Niquo<br />
+        Two Trains Came Through the Station at Once and It Felt Like a
+        Hurricane – Dylan Henner<br />
+        Reprise – DJRUM, Zosia Jagodzinska<br />
+        Flesh Eater – Wojciech Rusin<br />
+        Green Breaking – Clark<br />
+        Dolore di Orsini – Anna von Hausswolff<br />
         <AngelImage
           src={process.env.PUBLIC_URL + '/3.png'}
           alt="Engel 3"
         />
-        Green Breaking – Clark<br />
-        The Other Side – These New Puritans<br />
-        Red Sun – Anna von Hausswolff<br />
-        Gifts for the Surgeon – Wojciech Rusin<br />
-        Escorial – μ-Ziq<br />
-        * . . * – NAIMA<br />
         Silent Union – NYX<br />
+        Pescado – Vanessa Amara<br />
+        Ascending – The Nunnery<br />
+        The Other Side – These New Puritans<br />
+        Escorial – μ-Ziq<br />
+        Clouds – Desert Window<br />
         The Hollow – Keeley Forsyth<br />
-        Dolore di Orsini – Anna von Hausswolff<br />
-        <span className="sparkle-line spin-line top-stars">
-          <span className="sparkle-char">✶</span>
-          <span className="sparkle-char">❄</span>
-          <span className="sparkle-char">✧</span>
-        </span>
-        <br />
         More finishes other things – Mhm<br />
         Ways Regained – Pye Corner Audio<br />
-        Night / Sea – Pyur<br />
-        Lazria – Travis Lake<br />
-        Pescado – Vanessa Amara<br />
+        Eyes – Vanessa Bedoret<br />
         Waiting for Sleep – Single Version – Jungstötter, Isabelle Pabst<br />
-        Two Trains Came Through the Station at Once and It Felt Like a
-        Hurricane – Dylan Henner<br />
-        Eyes – Asea Bedoret<br />
         Industrial Love Song – These New Puritans, Caroline Polachek<br />
-        Gaviotas – Rival Consoles<br />
+        Photograph – Keeley Forsyth<br />
+        Biafra – Tony Njoku<br />
+        hindsight – Angie Halliwell, Js Donny<br />
+        Alyosha Lying – Clark<br />
         Left For Tomorrow – Perfume Genius<br />
         The Secret Garden – μ-Ziq, Mrs Jynx<br />
         How Bright You Are – Mikey Enwright, Oklou<br />
-        Barwa I – Pejzaż<br />
-        Biafra – Tony Njoku<br />
-        Elemental Fear – Noémi Büchi<br />
-        Fair Enough – Noémi Büchi, Joséphine de Weck<br />
-        Ascending – The Nunnery<br />
-        When I choose to be here with you – Tracey<br />
-        Alyosha Lying – Clark<br />
-        Flesh Eater – Wojciech Rusin<br />
-        Photograph – Keeley Forsyth<br />
-        Clouds – Lucy Gooch<br />
         Swirling Like A Rocket – Torus<br />
-        Masked Ball – 1999 Extended Mix – Jocelyn Pook<br />
-        hindsight – Angie Halliwell, Js Donny<br />
+        Gaviotas – Rival Consoles<br />
+        Elemental Fear – Noémi Büchi<br />
+        Cowboys and Angels – Remastered – George Michael<br />
         <AngelImage
           src={process.env.PUBLIC_URL + '/4.png'}
           alt="Engel 4"
