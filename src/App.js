@@ -93,7 +93,16 @@ function App() {
       }
     };
 
-    frameId = requestAnimationFrame(step);
+    if (isIOS) {
+      // iOS: Überspringe die Intro-Animation, gehe direkt zur Endposition
+      el.setAttribute(
+        'camera-orbit',
+        `${endOrbit.theta}deg ${endOrbit.phi}deg ${endOrbit.radius}%`
+      );
+      startContinuousOrbit();
+    } else {
+      frameId = requestAnimationFrame(step);
+    }
 
     return () => {
       clearTimers();
