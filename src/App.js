@@ -6,6 +6,9 @@ function App() {
   const modelSrc = process.env.PUBLIC_URL + '/regal.glb';
   const modelRef = useRef(null);
   const tiltRef = useRef(0);
+  const isIOS =
+    typeof navigator !== 'undefined' &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   useEffect(() => {
     const el = modelRef.current;
@@ -48,8 +51,50 @@ function App() {
       );
     };
 
+    let intervalId;
+
+    if (isIOS) {
+      // iOS: nur bei Scroll kurz bewegen
+      const handleTilt = () => {
+        const now = Date.now();
+        const elapsed = (now - lastTime) / 1000;
+        lastTime = now;
+        totalElapsed += elapsed;
+        const theta =
+          baseOrbit.theta +
+          swingOffset +
+          spinSpeed * totalElapsed +
+          swingAmpTheta * Math.sin(totalElapsed * swingSpeed);
+        const radius =
+          baseOrbit.radius + radiusOscAmp * Math.sin(totalElapsed * radiusOscSpeed);
+        const phi =
+          tiltRef.current + tiltOscAmp * Math.sin(totalElapsed * tiltOscSpeed);
+        el.setAttribute(
+          'camera-orbit',
+          `${theta}deg ${phi}deg ${radius}%`
+        );
+      };
+
+      const handleScrollRotate = () => {
+        // bei Scroll kurz rotieren (gedrosselt)
+        if (!intervalId) {
+          intervalId = setInterval(handleTilt, intervalMs * 4); // langsamer Takt
+          setTimeout(() => {
+            clearInterval(intervalId);
+            intervalId = null;
+          }, 1200); // nur kurz nach Scroll
+        }
+      };
+
+      window.addEventListener('scroll', handleScrollRotate, { passive: true });
+      return () => {
+        if (intervalId) clearInterval(intervalId);
+        window.removeEventListener('scroll', handleScrollRotate);
+      };
+    }
+
     tick();
-    const intervalId = setInterval(tick, intervalMs);
+    intervalId = setInterval(tick, intervalMs);
 
     const handleTilt = () => {
       const y = window.scrollY || 0;
@@ -58,12 +103,16 @@ function App() {
       // keine separate Kamera-Setzung hier; Tick übernimmt das Aktualisieren
     };
 
-    window.addEventListener('scroll', handleTilt, { passive: true });
-    handleTilt();
+    if (!isIOS) {
+      window.addEventListener('scroll', handleTilt, { passive: true });
+      handleTilt();
+    }
 
     return () => {
       clearInterval(intervalId);
-      window.removeEventListener('scroll', handleTilt);
+      if (!isIOS) {
+        window.removeEventListener('scroll', handleTilt);
+      }
     };
   }, []);
 
@@ -96,7 +145,7 @@ function App() {
         field-of-view="16deg"
         exposure="1.2"
         loading="lazy"
-        reveal="auto"
+        reveal={isIOS ? 'interaction' : 'auto'}
         environment-image=""
         shadow-intensity="0"
         shadow-softness="0.9"
