@@ -428,8 +428,8 @@ body {
   height: 100vh;
   z-index: 0;
   --poster-color: transparent;
-  opacity: 0;
-  animation: fadeInSoft 900ms ease-out forwards;
+  opacity: 1; /* sicher sichtbar, keine Intro-Animation */
+  animation: none;
 }
 
 @media (max-width: 768px) {

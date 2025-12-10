@@ -5,6 +5,44 @@ import '../App.css';
 function Content() {
   const [openYear, setOpenYear] = useState(null); // null = neue 2025-Playlist
 
+  const titleVariants = {
+    hidden: { opacity: 0, y: 12 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+  };
+  const textVariants = {
+    hidden: { opacity: 0, y: 16 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  };
+  const lineVariants = {
+    hidden: { opacity: 0, y: 10 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.25, ease: 'easeOut' } },
+  };
+  const textMotionProps = {
+    variants: textVariants,
+    initial: 'hidden',
+    whileInView: 'show',
+    viewport: { once: true, amount: 0.2 },
+  };
+
+  const renderLines = (lines) => (
+    <motion.div
+      {...textMotionProps}
+      className="text"
+      transition={{ staggerChildren: 0.05 }}
+    >
+      {lines.map((line, idx) => (
+        <motion.span
+          key={idx}
+          variants={lineVariants}
+          className="text-line"
+        >
+          {line}
+          <br />
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+
   const openArchiveYear = (year) => {
     setOpenYear(year);
   };
@@ -13,11 +51,175 @@ function Content() {
     setOpenYear(null);
   };
 
+  const lines2025 = [
+    'Onos – Travis Lake',
+    'Your absence, like rain, opens the light, infinite – Duncan Bellamy, BZDB, MA.MOYO',
+    'Dust That Floats – Isabelle Lewis, Valgeir Sigurðsson, Benjamin Abel Meirhaeghe, Elisabeth Klinck',
+    'Sickly, Sweetly, Summer Movie – Lone',
+    'Eserver Ni Rehtaf (Edit) – The Vernon Spring, aden',
+    'Dream Baby Dream – NYX',
+    'Enter – MIZU',
+    'Gifts for the Surgeon – Wojciech Rusin',
+    'Fire Leap – NYX, Gazelle Twin',
+    '* . . * – NAIMA',
+    'Red Sun – Anna von Hausswolff',
+    'Space Inside Your Mind – Nico Niquo',
+    'Two Trains Came Through the Station at Once and It Felt Like a Hurricane – Dylan Henner',
+    'Reprise – DJRUM, Zosia Jagodzinska',
+    'Flesh Eater – Wojciech Rusin',
+    'Green Breaking – Clark',
+    'Dolore di Orsini – Anna von Hausswolff',
+    'Silent Union – NYX',
+    'Pescado – Vanessa Amara',
+    'Ascending – The Nunnery',
+    'The Other Side – These New Puritans',
+    'Escorial – μ-Ziq',
+    'Clouds – Desert Window',
+    'The Hollow – Keeley Forsyth',
+    'More finishes other things – Mhm',
+    'Ways Regained – Pye Corner Audio',
+    'Eyes – Vanessa Bedoret',
+    'Waiting for Sleep – Single Version – Jungstötter, Isabelle Pabst',
+    'Industrial Love Song – These New Puritans, Caroline Polachek',
+    'Photograph – Keeley Forsyth',
+    'Biafra – Tony Njoku',
+    'hindsight – Angie Halliwell, Js Donny',
+    'Alyosha Lying – Clark',
+    'Left For Tomorrow – Perfume Genius',
+    'The Secret Garden – μ-Ziq, Mrs Jynx',
+    'How Bright You Are – Mikey Enwright, Oklou',
+    'Swirling Like A Rocket – Torus',
+    'Gaviotas – Rival Consoles',
+    'Elemental Fear – Noémi Büchi',
+    'Cowboys and Angels – Remastered – George Michael',
+  ];
+
+  const lines2024 = [
+    'YULLOLA - Blessed Obsessed',
+    'Lyra Pramuk - Cage',
+    'MIZU, Maria BC - Aveu (The Beginning Is a Farewell)',
+    'Isik Kural - Stems of Water',
+    'Adult Jazz - Dusk Song',
+    'helen island - alice dj',
+    't0ni - keepsake',
+    'S8JFOU - Pebble B',
+    'Clarissa Connelly - Wee Rosebud',
+    'Holland Andrews - Wordless',
+    'Salvia - True Star',
+    'Maxime Denuc - Fat Old Sun',
+    'Jazzboy - The Sound of Life',
+    'Jonny Nash - Perfume Dream',
+    'Romance - I Am Trying To Break Your Heart',
+    'Oneohtrix Point Never - Zones Without People',
+    'Isobel Waller-Bridge, 12 Ensemble - My Brain Distorts Again',
+    'Tim Hecker - Monotony',
+    'Dylan Henner - A New Living Being Opens Its Eyes',
+    'Chantal Michelle - Departure of Light',
+    'Giant Claw - Mir-Cam Startup',
+    'Dylan Henner - Everyone I\'ve Ever Loved Lives Here',
+    '7038634357 - Winded',
+    'Rachika Nayar - No Future',
+    'OHYUNG - symphonies sweeping!',
+    'Sofie Birch, Antonina Nowacka - Morning Room I',
+    'Nyokabi Kariuki - quiet face',
+    'Daniela Lalita - Trececerotres',
+    'Julianna Barwick - One Half',
+    'Samuel Organ - Soil',
+    'Sassy 009, Vegyn - Mystery Boy - Vegyn Remix',
+    'Dialect - Late Fragment',
+    'Sarah Meth - Computer Love',
+    'Caroline Polachek - The Gate - Extended Mix',
+    'Doon Kanda - welcome welcome',
+    'Colin Stetson - The righteous wrath of an honorable man',
+    'TWEAKS - Hills Have Eyes',
+    'Ani Zakareishvili - At First',
+    'Clarissa Connelly - Give it Back',
+    'Soap&Skin - The end',
+  ];
+
+  const lines2023 = [
+    'Bby Eco - *seeding*',
+    'Money Lang - Loveless, Pt. 1',
+    'HDMIRROR - ALWAYS TOO LATE',
+    'Why Be - Impiety',
+    'Taylor Deupree - wet',
+    'Tomaga - Intimate Immensity',
+    'Ssaliva - Cherry Stm',
+    'LDS - Portal Merge',
+    'Piper Toohey - and I will leave you with this',
+    '24thankyou - Interlude i',
+    'Vines - drive thru',
+    'jjjacob - Solitary Defeat',
+    'Wojciech Rusin - Speculum Veritatis',
+    'OKRAA - Ola De Luz',
+    'Ssaliva - Death Valley',
+    'Space Afrika - Honest Labour',
+    'Ouri - étude du marteau',
+    'Orchid Mantis - transatlantic',
+    'Robert Ouyang Rusli - Monument to Possibilities',
+    'Lia Kohl - in a specific room',
+    'Lia Kohl - Moon Bean',
+    'Martyna Basta - Fragile',
+    'Irena And Vojtech Havlovi - She Is Dissolving',
+    'Michel Banabila - Cassette Loops',
+    'Meitei - Shinkai',
+    'Soho Rezanejad - One Of My Shades',
+    'Bby Eco - Nights On Earth',
+    'Julianna Barwick - Sunlight, Heaven',
+    'Dialect - Teams',
+  ];
+
+  const lines2022 = [
+    'Plaid - Perspex',
+    'Oxhy - latest nights',
+    'Henry Purcell - Dido & Aeneas, Act I, Z. 626: II. Ah! Belinda',
+    'David Lang - Just (After Song of Songs) [Composer\'s Mix]',
+    'Björk - Her Mother’s House',
+    'Meredith Monk - Vessel: An Opera Epic: Epic',
+    'Oliver Leith - Last Days: Non Voglio Mai Vedere Il Sole Tramontare',
+    'TLF Trio - Passacaglia',
+    'Marina Herlop - Doiloi',
+    'Circuit des Yeux - Sculpting The Exodus - Claire Rousay Remix',
+    'Clark - Sparrow Arc Tall',
+    'Kate Bush - A Coral Room - 2018 Remaster',
+    'Lucy Liyou - Unnie',
+    'Oneohtrix Point Never - Tales From The Trash Stratum',
+    'Hatis Noit - Aura',
+    'Emile Mosseri - Darker Than This',
+    'Rachika Nayar - Our Wretched Fantasy',
+  ];
+
+  const lines2021 = [
+    'Ian William Craig - Before Meaning Comes',
+    'Samuel Organ - Kindness',
+    'Yawning Portal - The Burning Bridge',
+    'Tim Hecker - No Drums',
+    'Morton Feldman - Rothko Chapel 5',
+    'Astrid Sonne - Mistakes',
+    'Kaitlyn Aurelia Smith - Moon In Your Eye',
+    'Oliver Coates - Soaring X (feat. Malibu)',
+    'Björk - Frosti',
+    'Colleen - November',
+    'Saloli - Barcarolle',
+    'Maarja Nuut - Une meeles',
+    'Machinefabriek - Zucht 2',
+    'Bing & Ruth - Reflector',
+    'Holland Andrews - Gloss',
+    'Arca - Andro',
+    'Lotic - Always You',
+    'Soap&Skin - What A Wonderful World',
+    'Arca - Joya',
+    'Rival Consoles - I Like',
+    'Steve Hauschildt - Time We Have',
+  ];
+
   const render2025 = (withBackButton = false) => (
     <div className="playlist-link">
-      <FancyTitle>
-        2025 <br /> we prayed to archangel algorithm for sugarcoated christmas reveries
-      </FancyTitle>
+      <motion.div variants={titleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+        <FancyTitle>
+          2025 <br /> we prayed to archangel algorithm for sugarcoated christmas reveries
+        </FancyTitle>
+      </motion.div>
       <PlaylistButton href="https://open.spotify.com/playlist/0E7NMDAxrEIz2vvQGgUUJq?si=ba14e73aeaf847b6" />
       <p className="postcard-label">Postkarte</p>
       <ScrollFlipCard
@@ -27,7 +229,7 @@ function Content() {
         altBack="2025 Postkarte Rückseite"
         portrait
       />
-      <p className="text">
+      <motion.p {...textMotionProps} className="text">
         <span className="sparkle-line spin-line top-stars">
           <span className="sparkle-char">✶</span>
           <span className="sparkle-char">✧</span>
@@ -57,10 +259,6 @@ function Content() {
         Flesh Eater – Wojciech Rusin<br />
         Green Breaking – Clark<br />
         Dolore di Orsini – Anna von Hausswolff<br />
-        <AngelImage
-          src={process.env.PUBLIC_URL + '/3.png'}
-          alt="Engel 3"
-        />
         Silent Union – NYX<br />
         Pescado – Vanessa Amara<br />
         Ascending – The Nunnery<br />
@@ -89,7 +287,7 @@ function Content() {
           alt="Engel 4"
           variant="big"
         />
-      </p>
+      </motion.p>
       {withBackButton && (
         <button
           type="button"
@@ -113,9 +311,11 @@ function Content() {
 
         {openYear === 2024 && (
           <div className="playlist-link">
-            <FancyTitle>
-              2024 <br /> U MIGHT BE THE REASON FOR THE CHRISTMAS SEASON
-            </FancyTitle>
+      <motion.div variants={titleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+        <FancyTitle>
+          2024 <br /> U MIGHT BE THE REASON FOR THE CHRISTMAS SEASON
+        </FancyTitle>
+      </motion.div>
             <PlaylistButton href="https://open.spotify.com/playlist/1Y8WvSQlEhZDeFoPmQM6Os?si=ad8324c1898b48d8" />
             <p className="postcard-label">Postkarte</p>
             <ScrollFlipCard
@@ -125,7 +325,7 @@ function Content() {
               altBack="2024 Postkarte Rückseite"
             />
 
-            <p className="text">
+            <motion.p {...textMotionProps} className="text">
               YULLOLA - Blessed Obsessed<br />
               Lyra Pramuk - Cage<br />
               MIZU, Maria BC - Aveu (The Beginning Is a Farewell)<br />
@@ -166,7 +366,7 @@ function Content() {
               Ani Zakareishvili - At First<br />
               Clarissa Connelly - Give it Back<br />
               Soap&Skin - The end<br />
-            </p>
+            </motion.p>
 
             <p className="postcard-label">Website</p>
             <video
@@ -190,9 +390,11 @@ function Content() {
 
         {openYear === 2023 && (
           <div className="playlist-link">
-            <FancyTitle>
-              2023 <br /> House of Cherubim
-            </FancyTitle>
+            <motion.div variants={titleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+              <FancyTitle>
+                2023 <br /> House of Cherubim
+              </FancyTitle>
+            </motion.div>
             <PlaylistButton href="https://open.spotify.com/playlist/5rDEvWjqxY1HIkLZ6ebw4i?si=a02c2377804c4566" />
             <p className="postcard-label">Postkarte</p>
             <ScrollFlipCard
@@ -202,7 +404,7 @@ function Content() {
               altBack="2023 Postkarte Rückseite"
             />
 
-            <p className="text">
+            <motion.p {...textMotionProps} className="text">
               Bby Eco - *seeding* <br />
               Money Lang - Loveless, Pt. 1 <br />
               HDMIRROR - ALWAYS TOO LATE <br />
@@ -232,7 +434,7 @@ function Content() {
               Bby Eco - Nights On Earth <br />
               Julianna Barwick - Sunlight, Heaven <br />
               Dialect - Teams <br />
-            </p>
+            </motion.p>
 
             <p className="postcard-label">Website</p>
             <video
@@ -256,11 +458,13 @@ function Content() {
 
         {openYear === 2022 && (
           <div className="playlist-link">
-            <FancyTitle>
-              2022 <br /> All Caroling (oh,ah,oh)
-            </FancyTitle>
+            <motion.div variants={titleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+              <FancyTitle>
+                2022 <br /> All Caroling (oh,ah,oh)
+              </FancyTitle>
+            </motion.div>
             <PlaylistButton href="https://open.spotify.com/playlist/4A7XXZMGnOdX1mOrsofQyw?si=2d74216f8a4748da" />
-            <p className="text">
+            <motion.p {...textMotionProps} className="text">
               Plaid - Perspex<br />
               Oxhy - latest nights<br />
               Henry Purcell - Dido &amp; Aeneas, Act I, Z. 626: II. Ah! Belinda<br />
@@ -278,7 +482,7 @@ function Content() {
               Hatis Noit - Aura<br />
               Emile Mosseri - Darker Than This<br />
               Rachika Nayar - Our Wretched Fantasy<br />
-            </p>
+            </motion.p>
             <button
               type="button"
               className="back-button"
@@ -291,11 +495,13 @@ function Content() {
 
         {openYear === 2021 && (
           <div className="playlist-link">
-            <FancyTitle>
-              2021 <br /> If I was a DJ sent from heaven to heal you
-            </FancyTitle>
+            <motion.div variants={titleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+              <FancyTitle>
+                2021 <br /> If I was a DJ sent from heaven to heal you
+              </FancyTitle>
+            </motion.div>
             <PlaylistButton href="https://open.spotify.com/playlist/3DQpDTb8kCe4gxNfOAg776?si=c3c2300d10ab4cde" />
-            <p className="text">
+            <motion.p {...textMotionProps} className="text">
               Ian William Craig - Before Meaning Comes<br />
               Samuel Organ - Kindness<br />
               Yawning Portal - The Burning Bridge<br />
@@ -317,7 +523,7 @@ function Content() {
               Arca - Joya<br />
               Rival Consoles - I Like<br />
               Steve Hauschildt - Time We Have<br />
-            </p>
+            </motion.p>
             <button
               type="button"
               className="back-button"
