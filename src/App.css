@@ -384,6 +384,7 @@ body {
   margin: 0;
   overflow: hidden; /* Seite selbst nicht scrollen, nur Overlay */
   background-color: #ffffff;
+  overscroll-behavior: none; /* iOS/Safari: kein Durchscrollen in den Hintergrund */
 }
 
 .christmas-bg {
@@ -450,6 +451,7 @@ body {
   overflow-y: auto; /* nur der Inhalt scrollt */
   -webkit-overflow-scrolling: touch;
   z-index: 1;
+  overscroll-behavior: contain; /* verhindert Scrollen des Body im Overscroll */
 }
 
 .overlay-inner {
