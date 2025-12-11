@@ -51,50 +51,8 @@ function App() {
       );
     };
 
-    let intervalId;
-
-    if (isIOS) {
-      // iOS: nur bei Scroll kurz bewegen
-      const handleTilt = () => {
-        const now = Date.now();
-        const elapsed = (now - lastTime) / 1000;
-        lastTime = now;
-        totalElapsed += elapsed;
-        const theta =
-          baseOrbit.theta +
-          swingOffset +
-          spinSpeed * totalElapsed +
-          swingAmpTheta * Math.sin(totalElapsed * swingSpeed);
-        const radius =
-          baseOrbit.radius + radiusOscAmp * Math.sin(totalElapsed * radiusOscSpeed);
-        const phi =
-          tiltRef.current + tiltOscAmp * Math.sin(totalElapsed * tiltOscSpeed);
-        el.setAttribute(
-          'camera-orbit',
-          `${theta}deg ${phi}deg ${radius}%`
-        );
-      };
-
-      const handleScrollRotate = () => {
-        // bei Scroll kurz rotieren (gedrosselt)
-        if (!intervalId) {
-          intervalId = setInterval(handleTilt, intervalMs * 4); // langsamer Takt
-          setTimeout(() => {
-            clearInterval(intervalId);
-            intervalId = null;
-          }, 1200); // nur kurz nach Scroll
-        }
-      };
-
-      window.addEventListener('scroll', handleScrollRotate, { passive: true });
-      return () => {
-        if (intervalId) clearInterval(intervalId);
-        window.removeEventListener('scroll', handleScrollRotate);
-      };
-    }
-
     tick();
-    intervalId = setInterval(tick, intervalMs);
+    const intervalId = setInterval(tick, intervalMs);
 
     const handleTilt = () => {
       const y = window.scrollY || 0;
@@ -103,16 +61,12 @@ function App() {
       // keine separate Kamera-Setzung hier; Tick übernimmt das Aktualisieren
     };
 
-    if (!isIOS) {
-      window.addEventListener('scroll', handleTilt, { passive: true });
-      handleTilt();
-    }
+    window.addEventListener('scroll', handleTilt, { passive: true });
+    handleTilt();
 
     return () => {
       clearInterval(intervalId);
-      if (!isIOS) {
-        window.removeEventListener('scroll', handleTilt);
-      }
+      window.removeEventListener('scroll', handleTilt);
     };
   }, []);
 
@@ -143,12 +97,13 @@ function App() {
         camera-controls
         camera-orbit="-18deg 18deg 62%"
         field-of-view="16deg"
-        exposure="1.2"
+        exposure="1.8"
         loading="lazy"
-        reveal={isIOS ? 'interaction' : 'auto'}
-        environment-image=""
-        shadow-intensity="0"
+        reveal="auto"
+        environment-image="neutral"
+        shadow-intensity="0.25"
         shadow-softness="0.9"
+        ground-plane="shadow-only"
         interaction-prompt="none"
         poster={process.env.PUBLIC_URL + '/1.png'}
         class="start-regal"

@@ -431,6 +431,12 @@ body {
   --poster-color: transparent;
   opacity: 1; /* sicher sichtbar, keine Intro-Animation */
   animation: none;
+  filter:
+    hue-rotate(-10deg)
+    saturate(1.25)
+    brightness(1.12)
+    drop-shadow(0 16px 32px rgba(255, 120, 120, 0.32))
+    drop-shadow(0 10px 22px rgba(255, 204, 170, 0.26));
 }
 
 @media (max-width: 768px) {
