@@ -97,7 +97,7 @@ function App() {
         camera-controls
         camera-orbit="-18deg 18deg 62%"
         field-of-view="16deg"
-        exposure="1.8"
+        exposure="2.2"
         loading="lazy"
         reveal="auto"
         environment-image="neutral"

@@ -518,10 +518,18 @@ body {
   border-radius: 12px;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
   backface-visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease, filter 0.5s ease;
+  background: linear-gradient(180deg, rgba(255, 240, 245, 0.5), rgba(255, 255, 255, 0.4));
 }
 
 .postcard-back {
   transform: rotateY(180deg);
+}
+
+.postcard-face.loaded {
+  opacity: 1;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
 }
 
 @keyframes spinCard {

@@ -640,6 +640,9 @@ function ScrollFlipCard({ front, back, altFront, altBack, portrait = false }) {
   const { scrollYProgress } = useScroll();
   // Scroll-basierter Flip: bei ~ halber Seite einmal gedreht, darüber hinaus weiter
   const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [0, 180, 360]);
+  const handleLoad = (e) => {
+    e.target.classList.add('loaded');
+  };
 
   return (
     <div className="postcard">
@@ -650,8 +653,20 @@ function ScrollFlipCard({ front, back, altFront, altBack, portrait = false }) {
           whileHover={{ rotateY: 180 }}
           transition={{ type: 'spring', stiffness: 80, damping: 18 }}
         >
-          <img className="postcard-face" src={front} alt={altFront} />
-          <img className="postcard-face postcard-back" src={back} alt={altBack} />
+          <img
+            className="postcard-face"
+            src={front}
+            alt={altFront}
+            loading="lazy"
+            onLoad={handleLoad}
+          />
+          <img
+            className="postcard-face postcard-back"
+            src={back}
+            alt={altBack}
+            loading="lazy"
+            onLoad={handleLoad}
+          />
         </motion.div>
       </div>
     </div>
