@@ -9,6 +9,7 @@ function App() {
   const isIOS =
     typeof navigator !== 'undefined' &&
     /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const posterSrc = process.env.PUBLIC_URL + '/1.png';
 
   useEffect(() => {
     const el = modelRef.current;
@@ -18,18 +19,27 @@ function App() {
     const baseOrbit = isSmall
       ? { theta: -6, phi: 24, radius: 48 }
       : { theta: -4, phi: 22, radius: 52 }; // noch näher ran
-    const spinSpeed = isSmall ? 1.05 : 0.85; // moderat schnell
-    const swingAmpTheta = isSmall ? 14 : 10; // kräftigeres Schwenken
+    const spinSpeed = isIOS ? 0.45 : isSmall ? 1.05 : 0.85; // iOS gedrosselt
+    const swingAmpTheta = isIOS ? 6 : isSmall ? 14 : 10; // iOS weniger Schwenk
     const swingOffset = isSmall ? 10 : 8; // Basis-Schwenk nach rechts
-    const swingSpeed = 0.28;
-    const radiusOscAmp = isSmall ? 3.4 : 2.4; // etwas mehr Zoomen
-    const radiusOscSpeed = 0.34;
-    const tiltOscAmp = isSmall ? 7 : 5; // mehr Vorneigen
-    const tiltOscSpeed = 0.24;
-    const intervalMs = 80; // flüssig
+    const swingSpeed = isIOS ? 0.14 : 0.28;
+    const radiusOscAmp = isIOS ? 2.2 : isSmall ? 3.4 : 2.4; // iOS weniger Zoom
+    const radiusOscSpeed = isIOS ? 0.18 : 0.34;
+    const tiltOscAmp = isIOS ? 4 : isSmall ? 7 : 5; // iOS sanfter
+    const tiltOscSpeed = isIOS ? 0.16 : 0.24;
+    const intervalMs = isIOS ? 180 : 80; // iOS stark gedrosselt
     let lastTime = Date.now();
     let totalElapsed = 0;
     tiltRef.current = baseOrbit.phi;
+
+    if (isIOS) {
+      // iOS: keine laufende Animation, nur Startposition setzen
+      el.setAttribute(
+        'camera-orbit',
+        `${baseOrbit.theta}deg ${baseOrbit.phi}deg ${baseOrbit.radius}%`
+      );
+      return;
+    }
 
     const tick = () => {
       const now = Date.now();
@@ -90,30 +100,36 @@ function App() {
   return (
     <div className="start-root">
       <div className="christmas-bg" />
-      <model-viewer
-        ref={modelRef}
-        src={modelSrc}
-        alt="Regal"
-        camera-controls
-        camera-orbit="-18deg 18deg 62%"
-        field-of-view="16deg"
-        exposure="2.2"
-        loading="lazy"
-        reveal="auto"
-        environment-image="neutral"
-        shadow-intensity="0.25"
-        shadow-softness="0.9"
-        ground-plane="shadow-only"
-        interaction-prompt="none"
-        poster={process.env.PUBLIC_URL + '/1.png'}
-        class="start-regal"
-      />
 
-      <div className="overlay">
+      <section className="model-hero">
+        <model-viewer
+          ref={modelRef}
+          src={modelSrc}
+          alt="Regal"
+          camera-controls
+          camera-orbit="-18deg 18deg 62%"
+        field-of-view="16deg"
+          exposure="2.2"
+          loading="lazy"
+          reveal={isIOS ? 'interaction' : 'auto'}
+          environment-image=""
+          shadow-intensity="0"
+          shadow-softness="0.9"
+          minimum-render-scale={isIOS ? '0.6' : '1'}
+          interaction-prompt="none"
+        poster={posterSrc}
+        class="start-regal"
+        />
+        <p className="model-hint">
+          Tipp: antippen, ziehen oder pinch-to-zoom, um das Regal zu drehen und zu vergrößern.
+        </p>
+      </section>
+
+      <section className="content-wrap">
         <div className="overlay-inner">
           <Content />
         </div>
-      </div>
+      </section>
     </div>
   );
 }
