@@ -1,11 +1,15 @@
 import './App.css';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Content from './components/content';
 
 function App() {
   const modelSrc = process.env.PUBLIC_URL + '/regal.glb';
   const modelRef = useRef(null);
   const tiltRef = useRef(0);
+  const intervalRef = useRef(null);
+  const restartTimeoutRef = useRef(null);
+  const scrollPauseRef = useRef(null);
+  const [iosPaused, setIosPaused] = useState(false);
   const isIOS =
     typeof navigator !== 'undefined' &&
     /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -32,15 +36,6 @@ function App() {
     let totalElapsed = 0;
     tiltRef.current = baseOrbit.phi;
 
-    if (isIOS) {
-      // iOS: keine laufende Animation, nur Startposition setzen
-      el.setAttribute(
-        'camera-orbit',
-        `${baseOrbit.theta}deg ${baseOrbit.phi}deg ${baseOrbit.radius}%`
-      );
-      return;
-    }
-
     const tick = () => {
       const now = Date.now();
       const elapsed = (now - lastTime) / 1000;
@@ -61,22 +56,105 @@ function App() {
       );
     };
 
-    tick();
-    const intervalId = setInterval(tick, intervalMs);
-
-    const handleTilt = () => {
-      const y = window.scrollY || 0;
-      const extraTilt = Math.min(18, y * 0.02); // etwas stärkeres Vorneigen beim Scrollen
-      tiltRef.current = baseOrbit.phi + extraTilt;
-      // keine separate Kamera-Setzung hier; Tick übernimmt das Aktualisieren
+    const startAnim = () => {
+      if (intervalRef.current) return;
+      if (isIOS && iosPaused) return;
+      tick();
+      intervalRef.current = setInterval(tick, intervalMs);
     };
 
-    window.addEventListener('scroll', handleTilt, { passive: true });
-    handleTilt();
+    const stopAnim = () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      if (restartTimeoutRef.current) {
+        clearTimeout(restartTimeoutRef.current);
+        restartTimeoutRef.current = null;
+      }
+      if (scrollPauseRef.current) {
+        clearTimeout(scrollPauseRef.current);
+        scrollPauseRef.current = null;
+      }
+    };
+
+    // iOS: keine Auto-Animation, nur initial setzen und pausiert bleiben
+    if (!isIOS) {
+      startAnim();
+    }
+
+    const handleUserControlStart = () => {
+      setIosPaused(false);
+      stopAnim();
+    };
+
+    const handleUserControlEnd = () => {
+      // Anim nach kurzer Pause wieder anlaufen lassen
+      setIosPaused(false);
+      restartTimeoutRef.current = setTimeout(() => {
+        startAnim();
+      }, 1400);
+    };
+
+    const elRefCurrent = el;
+    elRefCurrent.addEventListener('pointerdown', handleUserControlStart, {
+      passive: true,
+    });
+    elRefCurrent.addEventListener('touchstart', handleUserControlStart, {
+      passive: true,
+    });
+    elRefCurrent.addEventListener('pointerup', handleUserControlEnd, {
+      passive: true,
+    });
+    elRefCurrent.addEventListener('touchend', handleUserControlEnd, {
+      passive: true,
+    });
+
+    const handleScrollPause = () => {
+      if (isIOS) return; // iOS: nicht während Scrollen animieren
+      stopAnim();
+      scrollPauseRef.current = setTimeout(() => {
+        startAnim();
+      }, 900);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!isIOS) startAnim();
+          } else {
+            stopAnim();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(elRefCurrent);
+
+    const handleContextLost = () => {
+      stopAnim();
+      setIosPaused(true);
+      // Nutzer kann per Poster neu laden
+      elRefCurrent.showPoster?.();
+    };
+    elRefCurrent.addEventListener('contextlost', handleContextLost);
+
+    window.addEventListener('scroll', handleScrollPause, { passive: true });
 
     return () => {
-      clearInterval(intervalId);
-      window.removeEventListener('scroll', handleTilt);
+      stopAnim();
+      if (scrollPauseRef.current) {
+        clearTimeout(scrollPauseRef.current);
+        scrollPauseRef.current = null;
+      }
+      io.disconnect();
+      window.removeEventListener('scroll', handleScrollPause);
+      elRefCurrent.removeEventListener('pointerdown', handleUserControlStart);
+      elRefCurrent.removeEventListener('touchstart', handleUserControlStart);
+      elRefCurrent.removeEventListener('pointerup', handleUserControlEnd);
+      elRefCurrent.removeEventListener('touchend', handleUserControlEnd);
+      elRefCurrent.removeEventListener('contextlost', handleContextLost);
     };
   }, []);
 
@@ -108,21 +186,17 @@ function App() {
           alt="Regal"
           camera-controls
           camera-orbit="-18deg 18deg 62%"
-        field-of-view="16deg"
+          field-of-view="16deg"
           exposure="2.2"
-          loading="lazy"
-          reveal={isIOS ? 'interaction' : 'auto'}
+          loading="eager"
+          reveal="auto"
           environment-image=""
           shadow-intensity="0"
           shadow-softness="0.9"
-          minimum-render-scale={isIOS ? '0.6' : '1'}
           interaction-prompt="none"
-        poster={posterSrc}
-        class="start-regal"
+          poster={posterSrc}
+          class="start-regal"
         />
-        <p className="model-hint">
-          Tipp: antippen, ziehen oder pinch-to-zoom, um das Regal zu drehen und zu vergrößern.
-        </p>
       </section>
 
       <section className="content-wrap">

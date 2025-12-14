@@ -575,26 +575,26 @@ function Content() {
 function FancyTitle({ children }) {
   const { scrollYProgress } = useScroll();
 
-  // Deutliche, aber begrenzte Verzerrung über den gesamten Scrollbereich
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [0, -38, 12]);
-  const x = useTransform(scrollYProgress, [0, 0.5, 1], [0, 24, -18]);
-  const rotateZ = useTransform(scrollYProgress, [0, 0.5, 1], [0, -10, 6]);
-  const skewX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -12, 10]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.28, 1.02]);
-  const letterSpacing = useTransform(scrollYProgress, [0, 0.5, 1], ['0.16em', '0.36em', '0.22em']);
+  // Glänzender Schwebe-Effekt über reine Transforms
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], [0, -22, 12]);
+  const x = useTransform(scrollYProgress, [0, 0.5, 1], [0, 14, -10]);
+  const rotateZ = useTransform(scrollYProgress, [0, 0.5, 1], [0, -5, 4]);
+  const skewX = useTransform(scrollYProgress, [0, 0.5, 1], [0, -5, 4]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 1.04]);
+  const shine = useTransform(scrollYProgress, [0, 1], ['0%', '120%']);
 
   return (
     <motion.h1
-      className="title"
+      className="title title-shimmer"
       style={{
         y,
         x,
         rotateZ,
         skewX,
         scale,
-        letterSpacing,
         transformOrigin: 'center',
         translateZ: 0,
+        backgroundPositionX: shine,
       }}
       transition={{ type: 'spring', stiffness: 55, damping: 18 }}
     >
