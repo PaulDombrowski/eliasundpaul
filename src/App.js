@@ -20,9 +20,10 @@ function App() {
     if (!el) return;
 
     const isSmall = window.innerWidth <= 768;
+    // Startposition für iOS etwas zurücknehmen
     const baseOrbit = isSmall
-      ? { theta: -6, phi: 24, radius: 48 }
-      : { theta: -4, phi: 22, radius: 52 }; // noch näher ran
+      ? { theta: -18, phi: 18, radius: 62 }
+      : { theta: -18, phi: 18, radius: 62 };
     const spinSpeed = isIOS ? 0.45 : isSmall ? 1.05 : 0.85; // iOS gedrosselt
     const swingAmpTheta = isIOS ? 6 : isSmall ? 14 : 10; // iOS weniger Schwenk
     const swingOffset = isSmall ? 10 : 8; // Basis-Schwenk nach rechts
@@ -78,8 +79,13 @@ function App() {
       }
     };
 
-    // iOS: keine Auto-Animation, nur initial setzen und pausiert bleiben
-    if (!isIOS) {
+    // iOS: einmalig setzen, keine Auto-Animation
+    if (isIOS) {
+      el.setAttribute(
+        'camera-orbit',
+        `${baseOrbit.theta}deg ${baseOrbit.phi}deg ${baseOrbit.radius}%`
+      );
+    } else {
       startAnim();
     }
 
